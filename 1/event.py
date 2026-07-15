@@ -14,7 +14,11 @@ class Event:                   # Descendiente de la clase "object" (default)
         self.time   = time        
         self.target = target        
         self.source = source
-        #self.id = id
+        self.id = id
+        self.idRoot = 0
+        self.walkers = 0
+        self.resourcesToFound = []
+        self.walkingLength = 0
     
     def getName(self):
         """ Devuelve el nombre del evento """
@@ -31,5 +35,31 @@ class Event:                   # Descendiente de la clase "object" (default)
     def getSource(self):
         """ Devuelve la identidad del proceso que origina el evento """
         return (self.source)
+    
     def getId(self):
         return (self.id)
+    
+    def getIdRoot(self):
+        return (self.idRoot)
+    
+    def setIdRoot(self, idRoot):
+        self.IdRoot =idRoot
+
+    def getWalkers(self):
+        return (self.walkers)
+    
+    def setWalkers(self, walkers):
+        self.walkers =walkers
+    
+    def getResourcesToFound(self):
+        return (self.resourcesToFound)
+    
+    def setResourcesToFound(self, resourcesToFound):
+        self.resourcesToFound =resourcesToFound
+    
+    def getWalkingLength(self):
+        return (self.walkingLength)
+    
+    def setWalkingLength(self, walkingLength):
+        self.walkingLength =walkingLength
+    

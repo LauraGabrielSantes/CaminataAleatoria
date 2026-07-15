@@ -11,9 +11,9 @@ class CaminataAleatoria(Model):
      print ("Mis vecinos son:", self.neighbors)
      self.visitado=False
      self.padre = self.id
-     self.longitud = 0
      self.disponibles = self.neighbors
      self.mis_recursos = self.llenaRecurso()
+     self.id
      print ("[",self.id,"]: Mis recursos son: ", self.mis_recursos,"\n")
 
    # Aqui se definen las acciones concretas que deben ejecutarse cuando se
@@ -26,7 +26,7 @@ class CaminataAleatoria(Model):
       listaMensaje = evento [1]
       recursoBuscado = listaMensaje [0]
       emisorBusqueda = listaMensaje [1]
-      TTL_recibido = listaMensaje [2]
+      longitud_recibido = listaMensaje [2]
     else:
       nombre = evento
 
