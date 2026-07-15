@@ -10,7 +10,9 @@ class CaminataAleatoria(Model):
      print ("\nInicio funciones", self.id)
      print ("Mis vecinos son:", self.neighbors)
      self.visitado=False
-     self.TTL = 0
+     self.padre = self.id
+     self.longitud = 0
+     self.disponibles = self.neighbors
      self.mis_recursos = self.llenaRecurso()
      print ("[",self.id,"]: Mis recursos son: ", self.mis_recursos,"\n")
 
@@ -83,9 +85,3 @@ class CaminataAleatoria(Model):
        if contenido not in listaRecursos: 
         listaRecursos.append(contenido)
      return listaRecursos
-   
-   def localizaRecurso(self, listaRecursos, recursoBuscado):
-     for i in listaRecursos:
-       if i == recursoBuscado:
-         return True
-     return False
