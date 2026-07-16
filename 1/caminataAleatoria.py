@@ -4,20 +4,16 @@ from event import Event
 from model import Model
 
 class CaminataAleatoria(Model):
-    contadorMensajes=0
-    encontrado = False
-    def init(self):
-        print ("\nInicio funciones", self.id)
-        print ("Mis vecinos son:", self.neighbors)
-        self.visited=False
-        self.father = self.id
-        self.avalibleNodes = self.neighbors
-        self.myResources = self.llenaRecurso()
-        self.idFromResourcesFound = []
-        print ("[",self.id,"]: Mis recursos son: ", self.mis_recursos,"\n")
 
+    # genera los recursos del nodo
+    def generateResources( self ) :
+        numberOfElements = random.randint( 2 , 10 )
+
+        for element in range( numberOfElements ) :
+            self.myResources.append( random.randint( 1 , 10 )
+
+    # envía en mensaje M a un nodo aleatorio disponible
     def randomSend( self , avalibleNodes , idRoot , walkingLength , resourcesToFound ) :
-
         if walkingLength == 0 || len( avalibleNodes ) == 0 :
             return
 
@@ -34,6 +30,7 @@ class CaminataAleatoria(Model):
         newevent.setResourcesToFound( resourcesToFound )
         self.transmit(newevent)
 
+    # revisa si el nodo tiene el contenido
     def iHaveContent( self , resourcesToFound ) :
         for myResource in self.myResources :
             for requiredResource in resourcesToFound :
@@ -47,41 +44,50 @@ class CaminataAleatoria(Model):
             self.randomSend( self.avalibleNodes , event.getIdRoot() , event.getWalkingLength() , event.getResourcesToFound() )
 
     def mHandler( self , event ) :
-        if self.visited == False :
-            self.visited = True
-            self.father = event.getSource()
-            self.avalibleNodes.remove( self.father )
 
-            if self.iHaveContent( event.getResourcesToFound() ) :
-                newevent = Event("REGRESA", self.clock + 1.0, event.getIdRoot() , self.id)
-                self.transmit(newevent)
-
-            # envíal siguiente si es posible
-            self.randomSend( self.avalibleNodes , event.getIdRoot() , event.getWalkingLength() , event.getResourcesToFound() )
-
-        else :
+        if self.visited == True :
             newevent = Event("RECHAZA", self.clock + 1.0, event.getSource() , self.id)
             self.transmit(newevent)
+            return
+
+        self.visited = True
+        self.father = event.getSource()
+        self.avalibleNodes.remove( self.father )
+
+        if self.iHaveContent( event.getResourcesToFound() ) :
+            newevent = Event("REGRESA", self.clock + 1.0, event.getIdRoot() , self.id)
+            self.transmit(newevent)
+
+        # envíal siguiente si es posible
+        self.randomSend( self.avalibleNodes , event.getIdRoot() , event.getWalkingLength() , event.getResourcesToFound() )
+
+    def regresaHandler( self , event ) :
+
+    def rechazaHandler( self , event ) :
+
+    def init(self):
+        self.visited=False
+        self.father = self.id
+        self.avalibleNodes = self.neighbors
+        self.myResources = self.generateResources()
+        self.idFromResourcesFound = []
+
+        print ("\nInicio funciones", self.id)
+        print ("Mis vecinos son:", self.neighbors)
+        print ("[",self.id,"]: Mis recursos son: ", self.mis_recursos,"\n")
 
     # Aqui se definen las acciones concretas que deben ejecutarse cuando se
     # recibe un evento
     def receive(self, event):
-     if nombre == "INICIA":
-         self.iniciaHandler( event )
-     elif nombre == "M":
-        self.mHandler( event )
-     elif nombre == "REGRESA":
+        if nombre == "INICIA":
+            self.iniciaHandler( event )
+
+        elif nombre == "M":
+            self.mHandler( event )
+
+        elif nombre == "REGRESA":
+            self.regresaHandler( event )
      
-     elif nombre == "RECHAZA":
-        CaminataAleatoria.encontrado = True
-        self.nodos_con_recurso.append(origen)
-        print ("[", self.id,"]: ¡El nodo ", origen," tiene el recurso!  t = ",self.clock,"\n>>> ACTUALIZO LISTA DE NODOS CON RECURSO: ",self.nodos_con_recurso,"\n")
+        elif nombre == "RECHAZA":
+            self.rechazaHandler( event )
   
-    def llenaRecurso(self):
-      listaRecursos =[]
-      tam = random.randint(2,10) 
-      for _ in range (tam): 
-         contenido = random.randint(1,100)
-         if contenido not in listaRecursos: 
-          listaRecursos.append(contenido)
-      return listaRecursos
