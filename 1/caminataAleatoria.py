@@ -62,8 +62,11 @@ class CaminataAleatoria(Model):
         self.randomSend( self.avalibleNodes , event.getIdRoot() , event.getWalkingLength() , event.getResourcesToFound() )
 
     def regresaHandler( self , event ) :
+        self.idFromResourcesFound.append( event.getSource() )
 
     def rechazaHandler( self , event ) :
+        if len( self.avalibleNodes ) != 0 :
+            self.randomSend( self.avalibleNodes , event.getIdRoot() , event.getWalkingLength() , event.getResourcesToFound() )
 
     def init(self):
         self.visited=False
