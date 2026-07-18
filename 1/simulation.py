@@ -47,3 +47,7 @@ class Simulation:                   # Descendiente de la clase "object" (default
             nextprocess = self.table[target] 
             nextprocess.setTime(nextevent.getTime()) 
             nextprocess.receive(nextevent)
+
+        print( "\n[ Simulator ] Mensajes Totales:" , self.engine.returnMessagesCounter() )
+        print( "[ Simulator ] Tiempo Total:" , self.engine.returnElapsedTime() )
+

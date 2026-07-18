@@ -19,6 +19,7 @@ class Event:                   # Descendiente de la clase "object" (default)
         self.walkers = 0
         self.resourcesToFound = []
         self.walkingLength = 0
+        self.walkerId = 0
     
     def getName(self):
         """ Devuelve el nombre del evento """
@@ -40,10 +41,10 @@ class Event:                   # Descendiente de la clase "object" (default)
         return (self.id)
     
     def getIdRoot(self):
-        return (self.idRoot)
+        return (self.idRoot )
     
     def setIdRoot(self, idRoot):
-        self.IdRoot =idRoot
+        self.idRoot = idRoot
 
     def getWalkers(self):
         return (self.walkers)
@@ -62,4 +63,10 @@ class Event:                   # Descendiente de la clase "object" (default)
     
     def setWalkingLength(self, walkingLength):
         self.walkingLength =walkingLength
+    
+    def getWalkerId(self):
+        return (self.walkerId)
+    
+    def setWalkerId(self, walkerId):
+        self.walkerId = walkerId
     
