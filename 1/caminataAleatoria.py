@@ -106,10 +106,10 @@ class CaminataAleatoria(Model):
         self.visited=False
         self.father = self.id
         self.avalibleNodes = self.neighbors
-        self.myResources = [] 
+        self.myResources = self.resources
         self.idFromResourcesFound = []
         
-        self.generateResources()
+        #self.generateResources()
 
         print ("Inicio funciones", self.id)
         print ("Mis vecinos son:", self.neighbors)

@@ -23,12 +23,13 @@ class Model:
         """ actualiza el valor del reloj local """
         self.clock = time
 		
-    def setProcess(self, process, neighbors, id): 
+    def setProcess(self, process, neighbors, id , resources): 
         """ asocia al modelo con su entidad activa (proceso), su lista 
         de vecinos y su identificador """
         self.process = process
         self.neighbors = neighbors
         self.id = id
+        self.resources = resources
 
     def transmit(self, event):
         """ invoca el metodo de transmision de su entidad activa (proceso) """

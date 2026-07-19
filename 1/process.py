@@ -14,11 +14,15 @@ class Process:                   # Descendiente de la clase "object" (default)
         self.neighbors = neighbors
         self.engine = engine
         self.id = id
+        self.resources = []
 		
+    def setResources( self , resources ) :
+        self.resources = resources
+
     def setModel(self, model):
         """ asocia al proceso con el modelo que debe ejecutar y viceversa """
         self.model = model
-        self.model.setProcess(self, self.neighbors, self.id)
+        self.model.setProcess(self, self.neighbors, self.id , self.resources)
         self.model.init()
 		
     def setTime(self, time):

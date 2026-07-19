@@ -9,7 +9,7 @@ class Simulation:                   # Descendiente de la clase "object" (default
     """ Atributos: "engine", "graph", "table", contiene tambien un
     constructor y los metodos "setModel()", "init()", "run()" """
 	
-    def __init__(self, filename, maxtime):
+    def __init__(self, filename, maxtime , resources ):
         """ construye su motor de simulacion, la grafica de comunicaciones y
         la tabla de procesos """
         self.engine = Simulator(maxtime)
@@ -25,9 +25,28 @@ class Simulation:                   # Descendiente de la clase "object" (default
                 neighbors.append(int(f))
             self.graph.append(neighbors) 
 
+        # obtiene los recursos de un archvio y los guarda en
+        # una lista, un elemento para cada nodo
+        f = open( resources )
+        lines = f.readlines() 
+        f.close()
+
+        resourcesListByNode = []
+
+        for line in lines:
+            fields = line.split() 
+            resourcesOfNode = []
+
+            for f in fields:
+                resourcesOfNode.append(int(f))
+
+            resourcesListByNode.append( resourcesOfNode ) 
+
+
         self.table  = [[]]           
         for i,row in enumerate(self.graph):
             newprocess = Process(row, self.engine, i+1)
+            newprocess.setResources( resourcesListByNode[i] )
             self.table.append(newprocess)
         		
     def setModel(self, model, id):
