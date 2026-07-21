@@ -56,7 +56,7 @@ class CaminataAleatoria(Model):
             return
 
         if len( self.avalibleNodes ) == 0 :
-            print( "[" , self.id , "]: no hay más vecinos que visitar. El caminante" , event.getWalkerId() , "terminó" )
+            print( "[" , self.id , "]: No hay más vecinos que visitar. El caminante" , event.getWalkerId() , "terminó" )
             return
 
         # elige el siguiente nodo al que se le envía M
