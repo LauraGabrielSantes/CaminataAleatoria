@@ -19,9 +19,24 @@ class main:
         experiment.setModel(m, i)
 
  # inserta un evento semilla en la agenda y arranca
-    seed = Event("INICIA" , 0.0 , 1, 1)
-    seed.setWalkingLength( 3 )
-    seed.setWalkers(2)
+    raiz =1
+    seed = Event("INICIA" , 0.0 , raiz, raiz)
+    seed.setWalkingLength( 20 )
+    seed.setWalkers(3)
     seed.setResourcesToFound( [6] )
     experiment.init(seed)
     experiment.run()
+
+    # Imprimir resultados de idFromResourcesFound de todos los nodos
+
+    print("RESULTADOS DE BÚSQUEDA DE RECURSOS")
+
+
+    process = experiment.table[raiz]
+    model = process.model
+
+    if model.idFromResourcesFound:
+        print(f"Nodo {raiz}: {model.idFromResourcesFound}")
+    else:
+        print ("No se encontró el recurso")
+

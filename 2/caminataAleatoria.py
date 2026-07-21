@@ -113,7 +113,7 @@ class CaminataAleatoria(Model):
     def regresaHandler( self , event ) :
         self.idFromResourcesFound.append( event.getSource() )
         print ("[",self.id,"]: Recibo REGRESA de" , event.getSource() , "del caminante" , event.getWalkerId() , "en" , self.clock )
-        print("[" , self.id , "]: Nodos con recursos solicitados:" , self.idFromResourcesFound )
+        print("[" , self.id , "]: ************Nodos con recursos solicitados:" , self.idFromResourcesFound,"************" )
         print()
 
     def rechazaHandler( self , event ) :
