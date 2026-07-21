@@ -22,6 +22,6 @@ class main:
     seed = Event("INICIA" , 0.0 , 1, 1)
     seed.setWalkingLength( 3 )
     seed.setWalkers(2)
-    seed.setResourcesToFound( [2] )
+    seed.setResourcesToFound( [7] )
     experiment.init(seed)
     experiment.run()
