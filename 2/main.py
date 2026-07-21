@@ -90,7 +90,7 @@ def generate_graphs(csv_file):
                     avg_msgs = sum(plot_data[key]['msgs']) / len(plot_data[key]['msgs'])
                     msgs.append(avg_msgs)
             plt.plot(ttls, msgs, marker='s', linewidth=2, markersize=8,
-                     label=f'{walkers} caminante(s)')
+                    label=f'{walkers} caminante(s)')
 
         plt.title('Cantidad de Mensajes vs Longitud de Caminata', fontsize=14)
         plt.xlabel('Longitud de Caminata (TTL)', fontsize=12)
@@ -130,19 +130,13 @@ def main():
     print(f"  Recurso a buscar: {resource_to_find}")
     print(f"  Nodos que lo tienen: {total_with_resource} de {len(resource_counts)} nodos con recursos")
 
-
-    # ---------------------------------------------------------------
-    # 3. Parámetros de evaluación
-    # ---------------------------------------------------------------
     walk_lengths = [1, 2, 3]
     num_walkers_list = [1, 2, 3]
     trials = 10
 
     csv_file = 'evaluation_results.csv'
 
-    # ---------------------------------------------------------------
-    # 4. Ejecutar evaluaciones
-    # ---------------------------------------------------------------
+
     print(f"\nIniciando evaluacion: {len(walk_lengths)} TTLs × {len(num_walkers_list)} caminantes × {trials} trials = {len(walk_lengths) * len(num_walkers_list) * trials} ejecuciones\n")
 
     with open(csv_file, 'w', newline='') as csvfile:
@@ -162,15 +156,13 @@ def main():
                     else:
                         print(f" {trial+1}/{trials}...", end='', flush=True)
 
-                    # Crear simulación (estado fresco cada vez)
+                    # Crear simulación 
                     maxtime = ttl * 10 + 10
                     experiment = Simulation(graph_file, maxtime, resources_file)
-
                     # Asignar modelo a cada nodo
                     for i in range(1, len(experiment.graph) + 1):
                         m = CaminataAleatoria()
                         experiment.setModel(m, i)
-
                     # Evento semilla
                     seed = Event("INICIA", 0.0, 1, 1)
                     seed.setWalkingLength(ttl)
@@ -194,15 +186,9 @@ def main():
     print(f"\nEvaluacion completada. {current_execution} ejecuciones realizadas.")
     print(f"   Resultados guardados en: {csv_file}")
 
-    # ---------------------------------------------------------------
-    # 5. Generar gráficas
-    # ---------------------------------------------------------------
     print("\nGenerando graficas...")
     generate_graphs(csv_file)
 
-    # ---------------------------------------------------------------
-    # 6. Resumen
-    # ---------------------------------------------------------------
     print(f"\n{'=' * 65}")
     print("  RESUMEN DE EVALUACION")
     print(f"{'=' * 65}")
